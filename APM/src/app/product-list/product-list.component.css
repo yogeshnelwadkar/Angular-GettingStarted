@@ -1,0 +1,10 @@
+thead{
+    background-color:aqua;
+}
+th, td {
+    padding: 10px;
+}
+button{
+    background-color: gray;
+    color:white;
+}

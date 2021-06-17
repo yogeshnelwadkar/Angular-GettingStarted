@@ -1,0 +1,60 @@
+<div class="card col-sm-12">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label >Filter by:</label>
+            <input type="text" class="col-sm-6"
+                [(ngModel)]='listFilter'/>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            <h4>Filterd by: {{listFilter}}</h4>
+            </div>
+        <hr/>
+        <div class="table-responsive col-sm-12">
+            <table class="table" *ngIf='products.length'>
+            <thead>
+                <tr>
+                    <th>   
+                        <button class="btn btn-primary"
+                        (click)="toggleImage()">
+                            {{showImage?'Hide Image':'Show Image'}}
+                        </button>
+                    </th>
+                    <th>Product</th>
+                    <th>Code</th>
+                    <th>Available</th>
+                    <th>Price</th>
+                    <th>5 Star Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor='let product of filteredProducts'>
+                        <td>
+                            <img *ngIf="this.showImage"
+                            [src] ='product.imageUrl'
+                            [title]='product.description'
+                            [style.width.px]='imageWidth'
+                            [style.margin.px]='imageMargin'
+                            />
+                        </td>
+                        <td>
+                            <a [routerLink]="['/products', product.productId]">
+                                {{product.productName}}
+                            </a>
+                        </td>
+                        <td>{{product.productCode | lowercase | convertToSpaces:'-' }}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.price | currency:'USD' : 'symbol' : '1.2-2'}}</td>
+                        <td><pm-star [rating]='product.starRating'
+                            (ratingClicked)='onRatingClicked($event)'></pm-star></td>
+
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+</div>
